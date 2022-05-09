@@ -1,18 +1,26 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChatApp.API.Hubs
 {
     public class ChatHub : Hub
     {
+        private static List<string> _clients;
+        public ChatHub()
+        {
+            _clients = new List<string>();
+        }
         public override async Task OnConnectedAsync()
         {
-            await Clients.All.SendAsync("clientJoin", Context.ConnectionId);
+            _clients.Add(Context.ConnectionId);
+            await Clients.All.SendAsync("getClients", _clients);
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Clients.All.SendAsync("clientLeaved",Context.ConnectionId);   
+            _clients.Remove(Context.ConnectionId);
+            await Clients.All.SendAsync("getClients", _clients);
         }
         public async Task SendMessageAsync(string message)
         {
