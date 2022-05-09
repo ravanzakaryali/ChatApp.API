@@ -1,3 +1,4 @@
+using ChatApp.API.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace ChatApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSignalR();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -34,6 +36,7 @@ namespace ChatApp.API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapControllers();
             });
         }
