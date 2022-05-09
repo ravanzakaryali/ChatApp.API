@@ -18,6 +18,17 @@ namespace ChatApp.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000")
+                                                            .AllowAnyHeader()
+                                                            .AllowAnyMethod()
+                                                            .AllowCredentials();
+                                  });
+            });
             services.AddControllers();
             services.AddSignalR();
         }

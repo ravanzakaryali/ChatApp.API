@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4dINbS0N3mNtoDxolkE39Hjp4LJFvbW4UVZPwKshcfNksO4CIKrqCGTojc02S8wB7KeUPJKbKK61M0xQqcEPcA==",
+  "dgSpecHash": "tj7d3aGYEoTCxsaW0iYib65Jt9SciMcRTAoU5R2Qw1z5m/RILvCNzTA5f4bCjtg2bhhbuSb4GCr8+xqHvDikGA==",
   "success": true,
-  "projectFilePath": "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
+  "projectFilePath": "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

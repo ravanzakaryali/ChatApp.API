@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj": {}
+    "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj": {}
   },
   "projects": {
-    "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj": {
+    "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
+        "projectUniqueName": "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
         "projectName": "ChatApp.API",
-        "projectPath": "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
+        "projectPath": "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\ChatApp.API.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Articles.az\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\obj\\",
+        "outputPath": "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
