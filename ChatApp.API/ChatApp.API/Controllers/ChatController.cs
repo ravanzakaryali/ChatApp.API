@@ -1,4 +1,5 @@
 ﻿using ChatApp.API.Hubs;
+using ChatApp.API.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -10,15 +11,15 @@ namespace ChatApp.API.Controllers
     [ApiController]
     public class ChatController : ControllerBase
     {
-        private readonly IHubContext<ChatHub> _hubContext;
-        public ChatController(IHubContext<ChatHub> hubContext)
+        private readonly IHubContext<ChatHub, IChatClient> _hubContext;
+        public ChatController(IHubContext<ChatHub, IChatClient> hubContext)
         {
             _hubContext = hubContext;
         }
         [HttpPost]
         public async Task<ActionResult> SendMessage(string message)
         {
-            await _hubContext.Clients.All.SendAsync("receiveMessage", message);
+            await _hubContext.Clients.All.ReceiveMessage(message);
             return Ok();
         }
     }
