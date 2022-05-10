@@ -7,11 +7,7 @@ namespace ChatApp.API.Hubs
 {
     public class ChatHub : Hub
     {
-        private static List<string> _clients;
-        public ChatHub()
-        {
-            _clients = new List<string>();
-        }
+        private static readonly List<string> _clients = new List<string>();
         public override async Task OnConnectedAsync()
         {
             _clients.Add(Context.ConnectionId);
