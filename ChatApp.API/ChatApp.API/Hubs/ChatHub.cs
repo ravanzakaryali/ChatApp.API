@@ -18,9 +18,11 @@ namespace ChatApp.API.Hubs
             _clients.Remove(Context.ConnectionId);
             await Clients.All.SendAsync("getClients", _clients);
         }
-        public async Task SendMessageAsync(string message)
-        {
-            await Clients.All.SendAsync("receiveMessage", message);
-        }
+
+        //It's in the controller
+        //public async Task SendMessageAsync(string message)
+        //{
+        //    await Clients.All.SendAsync("receiveMessage", message);
+        //}
     }
 }
