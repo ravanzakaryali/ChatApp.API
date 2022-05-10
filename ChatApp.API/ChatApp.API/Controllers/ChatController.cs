@@ -16,9 +16,10 @@ namespace ChatApp.API.Controllers
             _hubContext = hubContext;
         }
         [HttpPost]
-        public async Task SendMessage(string message)
+        public async Task<ActionResult> SendMessage(string message)
         {
             await _hubContext.Clients.All.SendAsync("receiveMessage", message);
+            return Ok();
         }
     }
 }
