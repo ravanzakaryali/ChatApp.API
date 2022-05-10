@@ -13,6 +13,7 @@ namespace ChatApp.API.Hubs
         {
             _clients.Add(Context.ConnectionId);
             await Clients.All.GetClients(_clients);
+            await Clients.Caller.GetConnectionId(Context.ConnectionId);
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {

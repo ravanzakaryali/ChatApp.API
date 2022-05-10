@@ -7,5 +7,6 @@ namespace ChatApp.API.Interfaces
     {
         Task ReceiveMessage(string message);
         Task GetClients(List<string> clients);
+        Task GetConnectionId(string connectionId);
     }
 }
