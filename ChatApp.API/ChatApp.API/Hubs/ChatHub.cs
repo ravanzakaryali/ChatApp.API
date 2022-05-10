@@ -24,6 +24,10 @@ namespace ChatApp.API.Hubs
         {
             await Clients.Client(connectionId).ReceiveMessage(message);
         }
+        public async Task AddGroup(string connectionId, string groupName)
+        {
+            await Groups.AddToGroupAsync(connectionId, groupName);
+        }
         //It's in the controller
         //public async Task SendMessageAsync(string message)
         //{
