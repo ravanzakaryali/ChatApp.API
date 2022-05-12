@@ -1,0 +1,10 @@
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Business.deps.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Business.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Business.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.csproj.AssemblyReference.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.GeneratedMSBuildEditorConfig.editorconfig
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.AssemblyInfoInputs.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.AssemblyInfo.cs
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.csproj.CoreCompileInputs.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.pdb
