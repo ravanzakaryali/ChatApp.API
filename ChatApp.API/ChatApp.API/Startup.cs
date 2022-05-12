@@ -1,6 +1,10 @@
 using ChatApp.API.Hubs;
+using ChatApp.Core.Entities;
+using ChatApp.Data.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +33,26 @@ namespace ChatApp.API
                                                             .AllowCredentials();
                                   });
             });
+            services.AddDbContext<Data.DataAccess.DbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+
+                options.Password.RequireLowercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = false;
+
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedAccount = true;
+            })
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
             services.AddControllers();
             services.AddSignalR();
         }

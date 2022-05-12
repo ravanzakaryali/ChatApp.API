@@ -8,3 +8,8 @@ E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\net
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.csproj.CoreCompileInputs.cache
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Core.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Data.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Data.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\bin\Debug\netcoreapp3.1\ChatApp.Core.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Business\obj\Debug\netcoreapp3.1\ChatApp.Business.csproj.CopyComplete
