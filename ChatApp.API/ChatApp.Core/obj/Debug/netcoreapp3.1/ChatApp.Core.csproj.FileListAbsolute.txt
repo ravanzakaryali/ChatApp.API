@@ -1,0 +1,10 @@
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\bin\Debug\netcoreapp3.1\ChatApp.Core.deps.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\bin\Debug\netcoreapp3.1\ChatApp.Core.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\bin\Debug\netcoreapp3.1\ChatApp.Core.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.csproj.AssemblyReference.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.AssemblyInfoInputs.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.AssemblyInfo.cs
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.csproj.CoreCompileInputs.cache
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.pdb
