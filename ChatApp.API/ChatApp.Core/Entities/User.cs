@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace ChatApp.Core.Entites
+namespace ChatApp.Core.Entities
 {
     public class User : IdentityUser
     {

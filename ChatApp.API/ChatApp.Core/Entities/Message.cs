@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChatApp.Core.Entites
+namespace ChatApp.Core.Entities
 {
     public class Message
     {

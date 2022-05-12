@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = ChatApp.Data
+build_property.ProjectDir = E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\
