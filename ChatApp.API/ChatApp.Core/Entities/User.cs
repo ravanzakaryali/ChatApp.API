@@ -9,7 +9,7 @@ namespace ChatApp.Core.Entities
         public string Surname { get; set; }
         public string Address { get; set; }
         public bool IsActive { get; set; }
-        public string Bio { get; set; }
+        public string Bio { get; set; } 
         public ICollection<Message> Messages { get; set; }
     }
 }
