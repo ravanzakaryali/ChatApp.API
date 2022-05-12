@@ -8,3 +8,6 @@ E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcore
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.csproj.CoreCompileInputs.cache
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\bin\Debug\netcoreapp3.1\ChatApp.Core.runtimeconfig.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\bin\Debug\netcoreapp3.1\ChatApp.Core.runtimeconfig.dev.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Core\obj\Debug\netcoreapp3.1\ChatApp.Core.genruntimeconfig.cache

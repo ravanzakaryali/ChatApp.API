@@ -11,3 +11,6 @@ E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\obj\Debug\netcore
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\obj\Debug\netcoreapp3.1\ChatApp.Data.csproj.CopyComplete
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\obj\Debug\netcoreapp3.1\ChatApp.Data.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\obj\Debug\netcoreapp3.1\ChatApp.Data.pdb
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\bin\Debug\netcoreapp3.1\ChatApp.Data.runtimeconfig.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\bin\Debug\netcoreapp3.1\ChatApp.Data.runtimeconfig.dev.json
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.Data\obj\Debug\netcoreapp3.1\ChatApp.Data.genruntimeconfig.cache
