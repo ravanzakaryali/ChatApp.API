@@ -1,6 +1,6 @@
 using ChatApp.API.Hubs;
 using ChatApp.Core.Entities;
-using ChatApp.Data.DataAccess;
+using ChatApp.Data.Subscription;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +22,7 @@ namespace ChatApp.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<DatabseSubscription<Message>>();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
