@@ -15,6 +15,7 @@ namespace ChatApp.Data.DataAccess
         {
             builder.ApplyConfiguration(new MessageConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+            base.OnModelCreating(builder);
         }
 
     }

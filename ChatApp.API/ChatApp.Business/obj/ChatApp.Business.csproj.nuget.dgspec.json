@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[3.1.25, )"
             },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
             "SqlTableDependency": {
               "target": "Package",
               "version": "[8.5.8, )"
@@ -135,6 +139,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.25, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             },
             "SqlTableDependency": {
               "target": "Package",
@@ -217,6 +225,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.25, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             },
             "SqlTableDependency": {
               "target": "Package",

@@ -21,6 +21,8 @@ namespace ChatApp.API.Controllers
         {
             var user = new User
             {
+                Name = "Revan",
+                Surname = "Zakaryali",
                 Address = "Azerbaijan",
                 Email = "r@gmail.com",
                 UserName = "revanzli"
