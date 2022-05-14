@@ -4,10 +4,10 @@ using TableDependency.SqlClient;
 
 namespace ChatApp.Data.Subscription
 {
-    public class DatabseSubscription<T> : IDatabaseSubscription where T : class, new()
+    public class DatabaseSubscription<T> : IDatabaseSubscription where T : class, new()
     {
         private readonly IConfiguration _configuration;
-        public DatabseSubscription(IConfiguration configuration)
+        public DatabaseSubscription(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -25,7 +25,7 @@ namespace ChatApp.Data.Subscription
             };
             _tableDependency.Start();   
         }
-        ~DatabseSubscription()
+        ~DatabaseSubscription()
         {
             _tableDependency.Dispose();
         }

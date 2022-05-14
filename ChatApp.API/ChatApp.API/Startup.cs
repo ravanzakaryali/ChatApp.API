@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ChatApp.API.Middleware;
 
 namespace ChatApp.API
 {
@@ -22,7 +23,7 @@ namespace ChatApp.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<DatabseSubscription<Message>>();
+            services.AddSingleton<DatabaseSubscription<Message>>();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -63,7 +64,7 @@ namespace ChatApp.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseDataSubscription<DatabaseSubscription<Message>>("Messages");
             app.UseHttpsRedirection();
 
             app.UseRouting();
