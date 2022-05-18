@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ChatApp.API.Middleware;
+using ChatApp.Business.Services.Interfaces;
+using ChatApp.Business.Services.Implementations;
 
 namespace ChatApp.API
 {
@@ -56,7 +58,9 @@ namespace ChatApp.API
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
             services.AddControllers();
+            services.AddScoped<IRabbitMqService, RabbitMqService>();
             services.AddSignalR();
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
