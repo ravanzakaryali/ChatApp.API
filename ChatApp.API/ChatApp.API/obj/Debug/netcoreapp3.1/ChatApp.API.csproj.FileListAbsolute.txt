@@ -93,3 +93,6 @@ E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcorea
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard1.3\System.Data.SqlClient.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\System.Threading.Channels.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll

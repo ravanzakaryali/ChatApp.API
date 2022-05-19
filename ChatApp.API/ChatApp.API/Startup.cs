@@ -14,6 +14,7 @@ using ChatApp.Business.Services.Implementations;
 using ChatApp.Data;
 using ChatApp.Core;
 using ChatApp.Data.Implementations;
+using ChatApp.Business.Profiles;
 
 namespace ChatApp.API
 {
@@ -61,6 +62,7 @@ namespace ChatApp.API
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
             services.AddControllers();
+            services.AddMapperService();
             services.AddScoped<IRabbitMqService, RabbitMqService>();
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

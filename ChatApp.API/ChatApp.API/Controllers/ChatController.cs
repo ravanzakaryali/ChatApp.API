@@ -16,7 +16,6 @@ namespace ChatApp.API.Controllers
     [ApiController]
     public class ChatController : ControllerBase
     {
-    {
         private readonly IHubContext<ChatHub, IChatClient> _hubContext;
         public ChatController(IHubContext<ChatHub, IChatClient> hubContext)
         {
