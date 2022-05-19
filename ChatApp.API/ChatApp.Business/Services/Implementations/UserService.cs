@@ -7,6 +7,7 @@ using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
 using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Threading.Tasks;
 
 namespace ChatApp.Business.Services.Implementations
@@ -15,13 +16,15 @@ namespace ChatApp.Business.Services.Implementations
     {
         public readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper)
+        public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _mapper = mapper;
+            _roleManager = roleManager;
         }
 
         public async Task<RegisterResult> Register(Register register)
@@ -39,5 +42,20 @@ namespace ChatApp.Business.Services.Implementations
             await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
             return registerResult;
         }
+        #region CreateRoles
+        public async Task CreateRoles()
+        {
+            foreach (var item in Enum.GetValues(typeof(Roles)))
+            {
+                if (!(await _roleManager.RoleExistsAsync(item.ToString())))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole
+                    {
+                        Name = item.ToString()
+                    });
+                }
+            }
+        }
+        #endregion
     }
 }
