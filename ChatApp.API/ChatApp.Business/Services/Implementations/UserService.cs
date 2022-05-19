@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ChatApp.Business.DTO_s.Autheticate;
-using ChatApp.Business.DTO_s.Errors;
 using ChatApp.Business.Exceptions;
 using ChatApp.Business.Helpers;
 using ChatApp.Business.Services.Interfaces;

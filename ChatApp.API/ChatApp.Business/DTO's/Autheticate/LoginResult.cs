@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
-namespace ChatApp.Business.DTO_s.Errors
+namespace ChatApp.Business.DTO_s.Autheticate
 {
     public class LoginResult
     {
