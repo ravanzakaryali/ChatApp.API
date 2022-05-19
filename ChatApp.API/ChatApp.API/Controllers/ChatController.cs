@@ -1,6 +1,7 @@
 ﻿using ChatApp.API.Hubs;
 using ChatApp.API.Interfaces;
 using ChatApp.Business.DTO_s.Message;
+using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -15,6 +16,7 @@ namespace ChatApp.API.Controllers
     [ApiController]
     public class ChatController : ControllerBase
     {
+    {
         private readonly IHubContext<ChatHub, IChatClient> _hubContext;
         public ChatController(IHubContext<ChatHub, IChatClient> hubContext)
         {
@@ -23,18 +25,6 @@ namespace ChatApp.API.Controllers
         [HttpPost]
         public async Task<ActionResult> SendMessage(MessageDto message)
         {
-            ConnectionFactory factory = new ConnectionFactory
-            {
-                Uri = new Uri("amqp://guest:guest@localhost:5672")
-            };
-            using IConnection connection = factory.CreateConnection();
-            using IModel chanel = connection.CreateModel();
-
-            chanel.QueueDeclare("messagequeue", true, false, false);
-            byte[] data = Encoding.UTF8.GetBytes(message.Message);
-
-            chanel.BasicPublish("", "messagequeue",body: data);
-
             await _hubContext.Clients.All.ReceiveMessage(message.Message);
             return Ok();
         }

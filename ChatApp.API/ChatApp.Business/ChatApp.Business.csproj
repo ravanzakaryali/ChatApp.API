@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ChatApp.Data\ChatApp.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Implementations\" />
-  </ItemGroup>
-
 </Project>

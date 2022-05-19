@@ -22,7 +22,7 @@ namespace ChatApp.Business.Services.Implementations
             };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: "messagequeue",
+            channel.QueueDeclare(queue: "message",
                            durable: true,
                            exclusive: false,
                            autoDelete: false,
@@ -31,7 +31,7 @@ namespace ChatApp.Business.Services.Implementations
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "",
-                           routingKey: "MyQueue",
+                           routingKey: "message",
                            basicProperties: null,
                            body: body);
         }

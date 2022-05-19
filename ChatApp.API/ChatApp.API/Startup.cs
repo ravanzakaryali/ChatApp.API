@@ -59,6 +59,7 @@ namespace ChatApp.API
                 .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
             services.AddControllers();
             services.AddScoped<IRabbitMqService, RabbitMqService>();
+            services.AddScoped<RabbitToDatabase>();
             services.AddSignalR();
 
         }
