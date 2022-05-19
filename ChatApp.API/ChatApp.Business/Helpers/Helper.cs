@@ -42,15 +42,5 @@ namespace ChatApp.Business.Helpers
             @string = Regex.Replace(@string, @"\s", "_");
             return @string;
         }
-        private async Task<string> GenerateUsername(string fullname)
-        {
-            string username = GeneratorString(fullname);
-            User isUserName = await _userManager.FindByNameAsync(username);
-            if (isUserName != null)
-            {
-                await GenerateUserName(fullname);
-            }
-            return username;
-        }
     }
 }

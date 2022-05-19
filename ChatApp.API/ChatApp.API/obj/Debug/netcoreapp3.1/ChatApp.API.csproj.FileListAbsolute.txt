@@ -96,3 +96,4 @@ E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcorea
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\Programming\SignalR\SignalR.Server\ChatApp.API\ChatApp.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -15,6 +15,10 @@ using ChatApp.Data;
 using ChatApp.Core;
 using ChatApp.Data.Implementations;
 using ChatApp.Business.Profiles;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
 
 namespace ChatApp.API
 {
@@ -61,6 +65,21 @@ namespace ChatApp.API
             })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(option =>
+            {
+                option.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidAudience = Configuration.GetSection("Jwt:audience").Value,
+                    ValidIssuer = Configuration.GetSection("Jwt:issuer").Value,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:securityKey").Value)),
+                    ClockSkew = TimeSpan.Zero,
+                };
+            });
             services.AddControllers();
             services.AddMapperService();
             services.AddScoped<IRabbitMqService, RabbitMqService>();
