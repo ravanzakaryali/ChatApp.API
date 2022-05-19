@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ChatApp.Business.DTO_s.Autheticate;
+using ChatApp.Business.DTO_s.Errors;
+using ChatApp.Business.Exceptions;
 using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
 using ChatApp.Core.Entities;
@@ -21,13 +23,18 @@ namespace ChatApp.Business.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task Register(Register register)
+        public async Task<RegisterResult> Register(Register register)
         {
+            RegisterResult registerResult = new RegisterResult();
             User isEmail = await _userManager.FindByNameAsync(register.Email);
-            //Exception not  found exception
+            if (isEmail != null) throw new AlreadyExistsException("Already exception");
             IdentityResult result = await _userManager.CreateAsync(_mapper.Map<User>(register), register.Password);
-            //Exception
-            //Added Role
+            if (!result.Succeeded)
+            {
+                registerResult.Error = result.Errors;
+                return registerResult;
+            };
+            return registerResult;
         }
     }
 }

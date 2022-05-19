@@ -5,6 +5,6 @@ namespace ChatApp.Business.Services.Interfaces
 {
     public interface IUserService
     {
-        Task Register(Register register);
+        Task<RegisterResult> Register(Register register);
     }
 }
