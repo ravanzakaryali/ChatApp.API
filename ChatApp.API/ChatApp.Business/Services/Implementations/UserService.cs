@@ -48,6 +48,7 @@ namespace ChatApp.Business.Services.Implementations
             User isEmail = await _userManager.FindByNameAsync(register.Email);
             if (isEmail != null) throw new AlreadyExistsException("Already exception");
             User user = _mapper.Map<User>(register);
+            register.Username = await GenerateUsername($"{register.Name} + {register.Username}");
             IdentityResult result = await _userManager.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
@@ -84,21 +85,7 @@ namespace ChatApp.Business.Services.Implementations
                 Expiration = token.ValidTo
             };
         }
-        #region CreateRoles
-        public async Task CreateRoles()
-        {
-            foreach (var item in Enum.GetValues(typeof(Roles)))
-            {
-                if (!(await _roleManager.RoleExistsAsync(item.ToString())))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole
-                    {
-                        Name = item.ToString()
-                    });
-                }
-            }
-        }
-        #endregion
+      
 
         public async Task<RefreshTokenResult> RefreshToken(TokenModel tokenModel)
         {
@@ -130,5 +117,30 @@ namespace ChatApp.Business.Services.Implementations
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
+        private async Task<string> GenerateUsername(string fullname)
+        {
+            string username = Helper.GeneratorString(fullname);
+            User isUserName = await _userManager.FindByNameAsync(username);
+            if (isUserName != null)
+            {
+                await GenerateUsername(fullname);
+            }
+            return username;
+        }
+        #region CreateRoles
+        public async Task CreateRoles()
+        {
+            foreach (var item in Enum.GetValues(typeof(Roles)))
+            {
+                if (!(await _roleManager.RoleExistsAsync(item.ToString())))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole
+                    {
+                        Name = item.ToString()
+                    });
+                }
+            }
+        }
+        #endregion
     }
 }
