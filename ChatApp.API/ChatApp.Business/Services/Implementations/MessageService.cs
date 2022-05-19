@@ -1,15 +1,19 @@
-﻿using ChatApp.Business.Services.Interfaces;
+﻿using AutoMapper;
+using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
 
 namespace ChatApp.Business.Services.Implementations
 {
     internal class MessageService : IMessageService
     {
-        public readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper; 
+        
 
-        public MessageService(IUnitOfWork unitOfWork)
+        public MessageService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
     }
 }
