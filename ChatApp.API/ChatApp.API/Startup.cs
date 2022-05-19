@@ -11,6 +11,9 @@ using Microsoft.Extensions.Hosting;
 using ChatApp.API.Middleware;
 using ChatApp.Business.Services.Interfaces;
 using ChatApp.Business.Services.Implementations;
+using ChatApp.Data;
+using ChatApp.Core;
+using ChatApp.Data.Implementations;
 
 namespace ChatApp.API
 {
@@ -59,7 +62,8 @@ namespace ChatApp.API
                 .AddEntityFrameworkStores<Data.DataAccess.DbContext>();
             services.AddControllers();
             services.AddScoped<IRabbitMqService, RabbitMqService>();
-            services.AddScoped<RabbitToDatabase>();
+            services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSignalR();
 
         }

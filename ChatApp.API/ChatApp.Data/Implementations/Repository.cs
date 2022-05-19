@@ -11,8 +11,8 @@ namespace ChatApp.Data.Implementations
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        private readonly DataAccess.DbContext _context;
-        public Repository(DataAccess.DbContext context)
+        private readonly DbContext _context;
+        public Repository(DbContext context)
         {
             _context = context;
         }

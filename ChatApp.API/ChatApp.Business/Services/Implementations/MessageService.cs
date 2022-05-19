@@ -1,8 +1,5 @@
 ﻿using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ChatApp.Business.Services.Implementations
 {

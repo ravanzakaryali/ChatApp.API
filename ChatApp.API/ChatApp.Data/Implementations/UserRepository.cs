@@ -1,6 +1,7 @@
 ﻿using ChatApp.Core.Entities;
 using ChatApp.Core.Interface;
 using ChatApp.Data.DataAccess;
+using Microsoft.AspNetCore.Identity;
 
 namespace ChatApp.Data.Implementations
 {
@@ -11,6 +12,5 @@ namespace ChatApp.Data.Implementations
         {
             _context = context;
         }
-
     }
 }

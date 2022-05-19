@@ -1,6 +1,4 @@
-﻿using ChatApp.Business.Services.Interfaces;
-
-namespace ChatApp.Business.Services.Implementations
+﻿namespace ChatApp.Business.Services.Interfaces
 {
     public interface IUnitOfWorkService
     {
