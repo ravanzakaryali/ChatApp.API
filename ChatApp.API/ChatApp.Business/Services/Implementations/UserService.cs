@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace ChatApp.Business.Services.Implementations
@@ -71,10 +72,16 @@ namespace ChatApp.Business.Services.Implementations
                 };
             authClaims.AddRange(roles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
             JwtSecurityToken token = _jwtService.CreateToken(authClaims);
+            var refreshToken = GenerateRefreshToken();
             _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+            user.RefreshToken = refreshToken;
+            await _userManager.UpdateAsync(user);
             return new LoginResult
             {
-                Token = token
+                Token = token,
+                RefreshToken = refreshToken,
+                Expiration = token.ValidTo
             };
         }
         #region CreateRoles
@@ -92,5 +99,36 @@ namespace ChatApp.Business.Services.Implementations
             }
         }
         #endregion
+
+        public async Task<RefreshTokenResult> RefreshToken(TokenModel tokenModel)
+        {
+            if (tokenModel is null) throw new NullReferenceException(nameof(tokenModel));
+            string accessToken = tokenModel.AccessToken;
+            string refreshToken = tokenModel.RefreshToken;
+            var principal = _jwtService.GetPrincipalFromExpiredToken(accessToken);
+            if (principal == null) throw new UnauthorizedAccessException();
+            string username = principal.Identity.Name;
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+                throw new NullReferenceException();
+            var newAccessToken = _jwtService.CreateToken(principal.Claims.ToList());
+            var newRefreshToken = GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            await _userManager.UpdateAsync(user);
+
+            return new RefreshTokenResult
+            {
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
+                RefreshToken = newRefreshToken
+            };
+        }
+        private static string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
+        }
     }
 }

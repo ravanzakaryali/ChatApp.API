@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace ChatApp.Business.DTO_s.Errors
 {
-    public class LoginResult
+    public class RefreshTokenResult
     {
-        public JwtSecurityToken Token { get; set; }
+        public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public DateTime Expiration { get; set; }
     }
 }

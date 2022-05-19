@@ -66,6 +66,7 @@ namespace ChatApp.API
             services.AddScoped<IRabbitMqService, RabbitMqService>();
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IJwtService, JwtService>();
             services.AddSignalR();
 
         }

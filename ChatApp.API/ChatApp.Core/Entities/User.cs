@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace ChatApp.Core.Entities
@@ -11,5 +12,7 @@ namespace ChatApp.Core.Entities
         public bool IsActive { get; set; }
         public string Bio { get; set; } 
         public ICollection<Message> Messages { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
