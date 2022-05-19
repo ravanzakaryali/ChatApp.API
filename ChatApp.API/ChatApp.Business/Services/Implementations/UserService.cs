@@ -19,7 +19,10 @@ namespace ChatApp.Business.Services.Implementations
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, RoleManager<IdentityRole> roleManager)
+        public UserService(IUnitOfWork unitOfWork, 
+                           UserManager<User> userManager, 
+                           RoleManager<IdentityRole> roleManager, 
+                           IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
