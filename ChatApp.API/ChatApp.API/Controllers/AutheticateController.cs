@@ -1,7 +1,11 @@
-﻿using ChatApp.Core.Entities;
+﻿using ChatApp.Business.DTO_s.Autheticate;
+using ChatApp.Business.DTO_s.Status;
+using ChatApp.Business.Services.Interfaces;
+using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ChatApp.API.Controllers
@@ -10,32 +14,47 @@ namespace ChatApp.API.Controllers
     [ApiController]
     public class AutheticateController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWorkService _unitOfWork;
 
-        public AutheticateController(UserManager<User> userManager)
+        public AutheticateController(IUnitOfWorkService unitOfWork)
         {
-            _userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
-        [HttpPost]
-        public async Task<ActionResult> CreateUser()
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(Login login)
         {
-            var user = new User
+            try
             {
-                Name = "Revan",
-                Surname = "Zakaryali",
-                Address = "Azerbaijan",
-                Email = "r@gmail.com",
-                UserName = "revanzli"
-            };
-            var result = await _userManager.CreateAsync(user, "Rz123456@");
-            if (!result.Succeeded)
-            {
-                foreach (IdentityError error in result.Errors)
-                {
-                    return StatusCode(StatusCodes.Status403Forbidden, new { status = error.Code, message = error.Description });
-                }
+                return Ok(await _unitOfWork.UserService.Login(login));
             }
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message});
+            }
+        }
+        [HttpPost("register")]
+        public async Task<ActionResult> Register(Register register)
+        {
+            try
+            {
+                return Ok(await _unitOfWork.UserService.Register(register));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
+            }
+        }
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult> RefreshToken(TokenModel tokenModel)
+        {
+            try
+            {
+                return Ok(await _unitOfWork.UserService.RefreshToken(tokenModel));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });      
+            }
         }
     }
 }

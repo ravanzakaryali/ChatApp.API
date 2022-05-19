@@ -6,5 +6,7 @@ namespace ChatApp.Business.Services.Interfaces
     public interface IUserService
     {
         Task<RegisterResult> Register(Register register);
+        Task<LoginResult> Login(Login login);
+        Task<RefreshTokenResult> RefreshToken(TokenModel tokenModel);
     }
 }
