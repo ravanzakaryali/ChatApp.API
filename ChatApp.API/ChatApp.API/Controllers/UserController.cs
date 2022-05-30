@@ -32,5 +32,17 @@ namespace ChatApp.API.Controllers
                 return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
             }
         }
+        [HttpGet("{username}")]
+        public async Task<ActionResult<GetUserDto>> Get(string username)
+        {
+            try
+            {
+                return Ok(await _unitOfWork.UserService.GetUser(username));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
+            }
+        } 
     }
 }
