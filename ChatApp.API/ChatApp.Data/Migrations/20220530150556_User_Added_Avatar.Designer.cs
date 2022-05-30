@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatApp.Data.Migrations
 {
-    [DbContext(typeof(DbContext))]
+    [DbContext(typeof(DataAccess.DbContext))]
     [Migration("20220530150556_User_Added_Avatar")]
     partial class User_Added_Avatar
     {

@@ -1,6 +1,7 @@
 ﻿using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.DTO_s.User;
 using ChatApp.Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace ChatApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUnitOfWorkService _unitOfWork;

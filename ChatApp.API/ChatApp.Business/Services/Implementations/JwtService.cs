@@ -19,6 +19,7 @@ namespace ChatApp.Business.Services.Implementations
         }
         public JwtSecurityToken CreateToken(List<Claim> authClaims)
         {
+
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:securityKey"]));
             _ = int.TryParse(_config["JWT:TokenValidityInMinutes"], out int tokenValidityInMinutes);
 

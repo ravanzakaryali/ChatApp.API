@@ -80,8 +80,8 @@ namespace ChatApp.Business.Services.Implementations
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.Email, user.Email),
                 };
-            authClaims.AddRange(roles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
-            JwtSecurityToken token = _jwtService.CreateToken(authClaims);
+            authClaims.AddRange(roles.Select(userRole => new Claim(ClaimTypes.Role,userRole)));
+            var token = _jwtService.CreateToken(authClaims);
             var refreshToken = Helper.GenerateRefreshToken();
             _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);

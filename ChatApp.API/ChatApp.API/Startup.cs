@@ -13,7 +13,6 @@ using ChatApp.Business.Services.Interfaces;
 using ChatApp.Business.Services.Implementations;
 using ChatApp.Data;
 using ChatApp.Core;
-using ChatApp.Data.Implementations;
 using ChatApp.Business.Profiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -82,10 +81,10 @@ namespace ChatApp.API
             });
             services.AddControllers();
             services.AddMapperService();
+            services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRabbitMqService, RabbitMqService>();
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IJwtService, JwtService>();
             services.AddSignalR();
 
         }
@@ -100,7 +99,9 @@ namespace ChatApp.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseCors();
             app.UseEndpoints(endpoints =>
             {
