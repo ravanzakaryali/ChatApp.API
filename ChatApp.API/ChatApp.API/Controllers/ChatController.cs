@@ -24,5 +24,6 @@ namespace ChatApp.API.Controllers
             await _hubContext.Clients.All.ReceiveMessage(message.Message);
             return Ok();
         }
+
     }
 }

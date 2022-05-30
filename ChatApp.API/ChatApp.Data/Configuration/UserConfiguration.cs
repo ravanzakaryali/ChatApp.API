@@ -20,6 +20,11 @@ namespace ChatApp.Data.Configuration
             builder.Property(u=>u.Surname)
                    .HasMaxLength(100)
                    .HasDefaultValue("XXX");
+            builder
+              .HasMany(u => u.Messages)
+              .WithOne(m => m.SendUser)
+              .HasForeignKey(m => m.SendUserId);
+          
         }
     }
 }

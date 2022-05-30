@@ -14,6 +14,7 @@ namespace ChatApp.Data.Configuration
                    .IsRequired();
             builder.Property(m => m.IsDeleted)
                    .HasDefaultValue(false);
+            
         }
     }
 }

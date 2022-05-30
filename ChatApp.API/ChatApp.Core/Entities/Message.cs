@@ -8,6 +8,8 @@ namespace ChatApp.Core.Entities
         public string Content { get; set; }
         public DateTime SenderDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string SendUserId { get; set; }
+        public User SendUser { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
     }
