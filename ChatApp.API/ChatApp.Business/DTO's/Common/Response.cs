@@ -1,4 +1,4 @@
-﻿namespace ChatApp.Business.DTO_s.Status
+﻿namespace ChatApp.Business.DTO_s.Common
 {
     public class Response
     {

@@ -1,4 +1,4 @@
-﻿using ChatApp.Business.DTO_s.Status;
+﻿using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.DTO_s.User;
 using ChatApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ChatApp.API.Controllers
 {
@@ -22,11 +21,11 @@ namespace ChatApp.API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public async Task<ActionResult<List<GetUserDto>>> GetAll()
+        public async Task<ActionResult<List<GetUserDto>>> GetAll([FromQuery] PaginateQuery query)
         {
             try
             {
-                return Ok(await _unitOfWork.UserService.GetUsers(1, 10));
+                return Ok(await _unitOfWork.UserService.GetUsers(query));
             }
             catch (Exception ex)
             {

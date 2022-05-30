@@ -1,5 +1,5 @@
 ﻿using ChatApp.Business.DTO_s.Autheticate;
-using ChatApp.Business.DTO_s.Status;
+using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Http;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ChatApp.Business.DTO_s.Autheticate;
+using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.DTO_s.User;
 using ChatApp.Business.Exceptions;
 using ChatApp.Business.Helpers;
@@ -41,9 +42,9 @@ namespace ChatApp.Business.Services.Implementations
             _jwtService = jwtService;
             _configuration = configuration;
         }
-        public async Task<List<GetUserDto>> GetUsers(int page,int size)
+        public async Task<List<GetUserDto>> GetUsers(PaginateQuery query)
         {
-            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(page,size,u=>u.Id));
+            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page,query.Size,u=>u.Id));
         }
         public async Task<RegisterResult> Register(Register register)
         {
