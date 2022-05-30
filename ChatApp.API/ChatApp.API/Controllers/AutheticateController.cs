@@ -56,5 +56,18 @@ namespace ChatApp.API.Controllers
                 return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });      
             }
         }
+        [HttpPost("create-roles")]
+        public async Task<ActionResult> CreateRole()
+        {
+            try
+            {
+                await _unitOfWork.UserService.CreateRoles();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
+            }
+        }
     }
 }

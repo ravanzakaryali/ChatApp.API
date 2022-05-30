@@ -6,5 +6,6 @@ namespace ChatApp.Business.DTO_s.Autheticate
     public class RegisterResult
     {
         public IEnumerable<IdentityError> Error { get; set; }
+        public string Username { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ChatApp.Business.DTO_s.Autheticate;
+using ChatApp.Business.DTO_s.User;
 using ChatApp.Business.Exceptions;
 using ChatApp.Business.Helpers;
 using ChatApp.Business.Services.Interfaces;
@@ -47,13 +48,14 @@ namespace ChatApp.Business.Services.Implementations
             User isEmail = await _userManager.FindByNameAsync(register.Email);
             if (isEmail != null) throw new AlreadyExistsException("Already exception");
             User user = _mapper.Map<User>(register);
-            register.Username = await GenerateUsername($"{register.Name} + {register.Username}");
+            user.UserName = await GenerateUsername($"{register.Name} + {register.Surname}");
             IdentityResult result = await _userManager.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
                 registerResult.Error = result.Errors;
                 return registerResult;
             };
+            registerResult.Username = user.UserName;
             await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
             return registerResult;
         }
@@ -72,19 +74,18 @@ namespace ChatApp.Business.Services.Implementations
                 };
             authClaims.AddRange(roles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
             JwtSecurityToken token = _jwtService.CreateToken(authClaims);
-            var refreshToken = GenerateRefreshToken();
+            var refreshToken = Helper.GenerateRefreshToken();
             _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
             user.RefreshToken = refreshToken;
             await _userManager.UpdateAsync(user);
             return new LoginResult
             {
-                Token = token,
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
                 RefreshToken = refreshToken,
                 Expiration = token.ValidTo
             };
         }
-      
 
         public async Task<RefreshTokenResult> RefreshToken(TokenModel tokenModel)
         {
@@ -98,7 +99,7 @@ namespace ChatApp.Business.Services.Implementations
             if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 throw new NullReferenceException();
             var newAccessToken = _jwtService.CreateToken(principal.Claims.ToList());
-            var newRefreshToken = GenerateRefreshToken();
+            var newRefreshToken = Helper.GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
             await _userManager.UpdateAsync(user);
@@ -108,13 +109,6 @@ namespace ChatApp.Business.Services.Implementations
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
                 RefreshToken = newRefreshToken
             };
-        }
-        private static string GenerateRefreshToken()
-        {
-            var randomNumber = new byte[64];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
         }
         private async Task<string> GenerateUsername(string fullname)
         {

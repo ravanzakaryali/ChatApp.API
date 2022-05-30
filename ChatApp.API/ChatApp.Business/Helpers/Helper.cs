@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -41,6 +42,13 @@ namespace ChatApp.Business.Helpers
             @string = @string[..(@string.Length <= maxLenght ? @string.Length : maxLenght)].Trim();
             @string = Regex.Replace(@string, @"\s", "_");
             return @string;
+        }
+        public static string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[64];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }

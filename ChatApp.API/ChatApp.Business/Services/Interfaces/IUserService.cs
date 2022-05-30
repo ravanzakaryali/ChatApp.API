@@ -8,5 +8,6 @@ namespace ChatApp.Business.Services.Interfaces
         Task<RegisterResult> Register(Register register);
         Task<LoginResult> Login(Login login);
         Task<RefreshTokenResult> RefreshToken(TokenModel tokenModel);
+        Task CreateRoles();
     }
 }
