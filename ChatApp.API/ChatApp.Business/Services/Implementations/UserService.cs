@@ -46,6 +46,10 @@ namespace ChatApp.Business.Services.Implementations
         {
             return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page,query.Size,u=>u.Id));
         }
+        public async Task<GetUserDto> GetUser(string username)
+        {
+            return _mapper.Map<GetUserDto>(await _unitOfWork.UserRepository.GetAsync(u=>u.UserName == username));
+        }
         public async Task<RegisterResult> Register(Register register)
         {
             RegisterResult registerResult = new RegisterResult();
