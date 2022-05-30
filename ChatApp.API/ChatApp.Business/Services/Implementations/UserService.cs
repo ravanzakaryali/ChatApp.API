@@ -43,7 +43,7 @@ namespace ChatApp.Business.Services.Implementations
         }
         public async Task<List<GetUserDto>> GetUsers(int page,int size)
         {
-            return _mapper.Map <List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(page, size, p => p.Id));
+            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(page,size,u=>u.Id));
         }
         public async Task<RegisterResult> Register(Register register)
         {
