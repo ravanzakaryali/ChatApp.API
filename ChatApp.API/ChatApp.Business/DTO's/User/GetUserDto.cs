@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChatApp.Business.DTO_s.User
+﻿namespace ChatApp.Business.DTO_s.User
 {
     public class GetUserDto
     {
@@ -13,5 +9,6 @@ namespace ChatApp.Business.DTO_s.User
         public string SurName { get; set; }
         public string Bio { get; set; }
         public bool IsActive { get; set; }
+        public string Avatar { get; set; }
     }
 }
