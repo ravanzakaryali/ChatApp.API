@@ -41,7 +41,10 @@ namespace ChatApp.Business.Services.Implementations
             _jwtService = jwtService;
             _configuration = configuration;
         }
-
+        public async Task<List<GetUserDto>> GetUsers(int page,int size)
+        {
+            return _mapper.Map <List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(page, size, p => p.Id));
+        }
         public async Task<RegisterResult> Register(Register register)
         {
             RegisterResult registerResult = new RegisterResult();
