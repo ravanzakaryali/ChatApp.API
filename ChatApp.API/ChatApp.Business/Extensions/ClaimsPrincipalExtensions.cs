@@ -18,5 +18,12 @@ namespace ChatApp.Business.Extensions
 
             return principal.FindFirstValue(ClaimTypes.Name);
         }
+        public static string GetLoggedInUserEmail(this ClaimsPrincipal principal)
+        {
+            if (principal == null)
+                throw new ArgumentNullException(nameof(principal));
+
+            return principal.FindFirstValue(ClaimTypes.Email);
+        }
     }
 }
