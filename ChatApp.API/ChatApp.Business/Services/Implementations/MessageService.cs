@@ -3,7 +3,6 @@ using ChatApp.Business.DTO_s.Message;
 using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
 using ChatApp.Core.Entities;
-using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace ChatApp.Business.Services.Implementations
