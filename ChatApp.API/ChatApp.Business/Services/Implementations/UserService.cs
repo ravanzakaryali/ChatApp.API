@@ -44,7 +44,7 @@ namespace ChatApp.Business.Services.Implementations
         }
         public async Task<List<GetUserDto>> GetUsers(PaginateQuery query)
         {
-            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page,query.Size,u=>u.Id));
+            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page = 1,query.Size = 10,u=>u.Id));
         }
         public async Task<GetUserDto> GetUser(string username)
         {
