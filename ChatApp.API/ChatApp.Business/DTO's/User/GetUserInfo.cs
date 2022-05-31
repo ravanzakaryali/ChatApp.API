@@ -1,4 +1,6 @@
-﻿namespace ChatApp.Business.DTO_s.User
+﻿using System;
+
+namespace ChatApp.Business.DTO_s.User
 {
     public class GetUserInfo
     {
@@ -10,5 +12,6 @@
         public string Bio { get; set; }
         public bool IsActive { get; set; }
         public string Avatar { get; set; }
+        public DateTime LastSeenDate { get; set; }
     }
 }

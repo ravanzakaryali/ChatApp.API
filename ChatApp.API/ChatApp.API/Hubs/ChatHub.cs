@@ -1,6 +1,7 @@
 ﻿using ChatApp.API.Interfaces;
 using ChatApp.Business.Extensions;
 using ChatApp.Data.DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -11,30 +12,49 @@ using System.Threading.Tasks;
 
 namespace ChatApp.API.Hubs
 {
+    [Authorize]
     public class ChatHub : Hub<IChatClient>
     {
         private static readonly List<string> _clients = new List<string>();
         private readonly Data.DataAccess.DbContext _context;
         private readonly IHttpContextAccessor _httpContext;
-        public ChatHub(Data.DataAccess.DbContext context, IHttpContextAccessor httpContext)
+        public ChatHub(
+            Data.DataAccess.DbContext context, 
+            IHttpContextAccessor httpContext)
         {
             _context = context;
             _httpContext = httpContext;
         }
+
         public override async Task OnConnectedAsync()
-        {
-            var userLoginId = _httpContext.HttpContext.User.GetUserId(); 
-            var user = await _context.Users.Where(u=>u.Id == userLoginId).FirstOrDefaultAsync();
-            _clients.Add(Context.ConnectionId);
-            await Clients.All.GetClients(_clients);
-            await Clients.Caller.GetConnectionId(Context.ConnectionId);
+            {
+            var name = Context.User.Identity.Name;
+            var user = await _context.Users.Where(u=>u.UserName == name).FirstOrDefaultAsync();
+            user.LastSeenDate = DateTime.UtcNow;
+            user.IsActive = true;
+            _context.Update(user);
+            _context.SaveChanges();
+            //_clients.Add(Context.ConnectionId);
+            //await Clients.All.GetClients(_clients);
+            //await Clients.Caller.GetConnectionId(Context.ConnectionId);
         }
-        public override async Task OnDisconnectedAsync(Exception exception)
+        [AllowAnonymous]
+        public override Task OnDisconnectedAsync(Exception exception)
         {
-            _clients.Remove(Context.ConnectionId);
-            await Clients.All.GetClients(_clients);
+            var name = Context.User.Identity.Name;
+            var user = _context.Users.Where(u => u.UserName == name).FirstOrDefault();
+            user.LastSeenDate = DateTime.UtcNow;
+            user.IsActive = false;
+            _context.Update(user);
+            _context.SaveChanges();
+            return base.OnDisconnectedAsync(exception);
+
         }
-        public async Task SendClientMessage(string message,string connectionId)
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
+        public async Task SendClientMessage(string message, string connectionId)
         {
             await Clients.Client(connectionId).ReceiveMessage(message);
         }
@@ -46,10 +66,10 @@ namespace ChatApp.API.Hubs
         {
             await Clients.Group(groupName).ReceiveMessage(message);
         }
-        //It's in the controller
-        //public async Task SendMessageAsync(string message)
-        //{
-        //    await Clients.All.SendAsync("receiveMessage", message);
-        //}
+        public async Task SendMessageAsync(string message)
+        {
+            //    await Clients.All.SendAsync("receiveMessage", message);
+            //}
+        }
     }
 }

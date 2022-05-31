@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
+using ChatApp.API.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ChatApp.API
 {
@@ -38,9 +40,11 @@ namespace ChatApp.API
                 options.AddDefaultPolicy(
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://127.0.0.1:5500")
+                                      builder.WithOrigins("http://localhost:3000",
+                                                          "https://localhost:3000",
+                                                          "https://localhost:5001/chathub")
                                                             .AllowAnyHeader()
-                                                            .AllowAnyMethod()
+                                                            .WithMethods("GET", "POST")
                                                             .AllowCredentials();
                                   });
             });
@@ -85,6 +89,7 @@ namespace ChatApp.API
             services.AddScoped<IRabbitMqService, RabbitMqService>();
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<Hub<IChatClient>,ChatHub>();
             services.AddSignalR();
 
         }
@@ -94,11 +99,11 @@ namespace ChatApp.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors();
             app.UseDataSubscription<DatabaseSubscription<Message>>("Messages");
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
