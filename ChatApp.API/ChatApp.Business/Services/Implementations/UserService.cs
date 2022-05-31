@@ -42,13 +42,15 @@ namespace ChatApp.Business.Services.Implementations
             _jwtService = jwtService;
             _configuration = configuration;
         }
-        public async Task<List<GetUserDto>> GetUsers(PaginateQuery query)
+        public async Task<List<UserInfo>> GetUsers(PaginateQuery query)
         {
-            return _mapper.Map<List<GetUserDto>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page = 1,query.Size = 10,u=>u.Id));
+            //user have a avatar and name surname 
+            //Messages login user and senduser
+            return _mapper.Map<List<UserInfo>>(await _unitOfWork.UserRepository.GetAllPaginateAsync(query.Page = 1,query.Size = 10,u=>u.Id));
         }
-        public async Task<GetUserDto> GetUser(string username)
+        public async Task<UserInfo> GetUser(string username)
         {
-            return _mapper.Map<GetUserDto>(await _unitOfWork.UserRepository.GetAsync(u=>u.UserName == username));
+            return _mapper.Map<UserInfo>(await _unitOfWork.UserRepository.GetAsync(u=>u.UserName == username));
         }
         public async Task<RegisterResult> Register(Register register)
         {
