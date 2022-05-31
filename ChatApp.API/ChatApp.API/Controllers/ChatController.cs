@@ -30,7 +30,7 @@ namespace ChatApp.API.Controllers
         {
             try
             {
-                await _hubContext.Clients.All.ReceiveMessage(message.Content);
+                await _hubContext.Clients.User(message.SendUserId).ReceiveMessage(message.Content);
                 await _unitOfWork.MessageService.SendMessage(message);
                 return NoContent();
             }
