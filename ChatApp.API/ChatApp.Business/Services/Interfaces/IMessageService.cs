@@ -6,5 +6,6 @@ namespace ChatApp.Business.Services.Interfaces
     public interface IMessageService
     {
         Task SendMessage(MessageDto message);
+        Task<GetMessage> GetMessages(string username);
     }
 }

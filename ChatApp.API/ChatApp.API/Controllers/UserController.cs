@@ -23,7 +23,7 @@ namespace ChatApp.API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public async Task<ActionResult<List<UserInfo>>> GetAll([FromQuery] PaginateQuery query)
+        public async Task<ActionResult<List<GetUser>>> GetAll([FromQuery] PaginateQuery query)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace ChatApp.API.Controllers
             }
         }
         [HttpGet("{username}")]
-        public async Task<ActionResult<UserInfo>> Get(string username)
+        public async Task<ActionResult<GetUserInfo>> Get(string username)
         {
             try
             {

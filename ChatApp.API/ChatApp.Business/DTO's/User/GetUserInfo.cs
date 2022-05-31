@@ -1,6 +1,6 @@
 ﻿namespace ChatApp.Business.DTO_s.User
 {
-    public class UserInfo
+    public class GetUserInfo
     {
         public string Id { get; set; }
         public string Email { get; set; }
