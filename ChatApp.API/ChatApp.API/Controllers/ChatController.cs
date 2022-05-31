@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChatApp.API.Controllers
@@ -32,6 +33,18 @@ namespace ChatApp.API.Controllers
                 await _hubContext.Clients.All.ReceiveMessage(message.Content);
                 await _unitOfWork.MessageService.SendMessage(message);
                 return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
+            }
+        }
+        [HttpGet("{username}")]
+        public async Task<ActionResult<List<MessageDto>>> GetMessages(string username)
+        {
+            try
+            {
+                return Ok(await _unitOfWork.MessageService.GetMessages(username));
             }
             catch (Exception ex)
             {

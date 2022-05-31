@@ -1,4 +1,5 @@
 ﻿using ChatApp.Business.DTO_s.Message;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChatApp.Business.Services.Interfaces
@@ -6,6 +7,6 @@ namespace ChatApp.Business.Services.Interfaces
     public interface IMessageService
     {
         Task SendMessage(MessageDto message);
-        Task<GetMessage> GetMessages(string username);
+        Task<List<GetMessage>> GetMessages(string username);
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using ChatApp.Business.Extensions;
 using ChatApp.Business.Exceptions;
+using System.Collections.Generic;
 
 namespace ChatApp.Business.Services.Implementations
 {
@@ -31,14 +32,14 @@ namespace ChatApp.Business.Services.Implementations
             await _unitOfWork.MessageRepository.CreateAsync(newMessage);
             await _unitOfWork.SaveAsync();
         }
-        public async Task<GetMessage> GetMessages(string username)
+        public async Task<List<GetMessage>> GetMessages(string username)
         {
             User user = await _unitOfWork.UserRepository.GetAsync(u => u.UserName == username);
             if (user is null)
                     throw new NotFoundException("User is not defined");
             var loginUserId = _httpContext.HttpContext.User.GetUserId();
             var messagesDb = await _unitOfWork.MessageRepository.GetAllPaginateAsync(1,10,m=>m.SenderDate,m=>m.SendUserId == user.Id && m.UserId == loginUserId);
-            return _mapper.Map<GetMessage>(messagesDb);
+            return _mapper.Map<List<GetMessage>>(messagesDb);
         }
     }
 }
