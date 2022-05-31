@@ -6,8 +6,8 @@ using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using ChatApp.Business.Extensions;
-using ChatApp.Business.Exceptions;
 using System.Collections.Generic;
+using ChatApp.Business.Exceptions;
 
 namespace ChatApp.Business.Services.Implementations
 {

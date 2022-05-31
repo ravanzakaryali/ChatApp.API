@@ -1,7 +1,12 @@
 ﻿using ChatApp.API.Interfaces;
+using ChatApp.Business.Extensions;
+using ChatApp.Data.DataAccess;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChatApp.API.Hubs
@@ -9,8 +14,17 @@ namespace ChatApp.API.Hubs
     public class ChatHub : Hub<IChatClient>
     {
         private static readonly List<string> _clients = new List<string>();
+        private readonly Data.DataAccess.DbContext _context;
+        private readonly IHttpContextAccessor _httpContext;
+        public ChatHub(Data.DataAccess.DbContext context, IHttpContextAccessor httpContext)
+        {
+            _context = context;
+            _httpContext = httpContext;
+        }
         public override async Task OnConnectedAsync()
         {
+            var userLoginId = _httpContext.HttpContext.User.GetUserId(); 
+            var user = await _context.Users.Where(u=>u.Id == userLoginId).FirstOrDefaultAsync();
             _clients.Add(Context.ConnectionId);
             await Clients.All.GetClients(_clients);
             await Clients.Caller.GetConnectionId(Context.ConnectionId);
