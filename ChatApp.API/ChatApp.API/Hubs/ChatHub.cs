@@ -1,6 +1,7 @@
 ﻿using ChatApp.API.Interfaces;
 using ChatApp.Business.Extensions;
 using ChatApp.Data.DataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
@@ -12,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace ChatApp.API.Hubs
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ChatHub : Hub<IChatClient>
     {
         private static readonly List<string> _clients = new List<string>();
         private readonly Data.DataAccess.DbContext _context;
         private readonly IHttpContextAccessor _httpContext;
         public ChatHub(
-            Data.DataAccess.DbContext context, 
+            Data.DataAccess.DbContext context,
             IHttpContextAccessor httpContext)
         {
             _context = context;
@@ -27,9 +28,9 @@ namespace ChatApp.API.Hubs
         }
 
         public override async Task OnConnectedAsync()
-            {
+        {
             var name = Context.User.Identity.Name;
-            var user = await _context.Users.Where(u=>u.UserName == name).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(u => u.UserName == name).FirstOrDefaultAsync();
             user.LastSeenDate = DateTime.UtcNow;
             user.IsActive = true;
             _context.Update(user);
@@ -38,7 +39,6 @@ namespace ChatApp.API.Hubs
             //await Clients.All.GetClients(_clients);
             //await Clients.Caller.GetConnectionId(Context.ConnectionId);
         }
-        [AllowAnonymous]
         public override Task OnDisconnectedAsync(Exception exception)
         {
             var name = Context.User.Identity.Name;
@@ -49,10 +49,6 @@ namespace ChatApp.API.Hubs
             _context.SaveChanges();
             return base.OnDisconnectedAsync(exception);
 
-        }
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
         }
         public async Task SendClientMessage(string message, string connectionId)
         {
@@ -65,11 +61,6 @@ namespace ChatApp.API.Hubs
         public async Task SendGroupMessage(string message, string groupName)
         {
             await Clients.Group(groupName).ReceiveMessage(message);
-        }
-        public async Task SendMessageAsync(string message)
-        {
-            //    await Clients.All.SendAsync("receiveMessage", message);
-            //}
         }
     }
 }

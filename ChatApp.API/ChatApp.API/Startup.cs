@@ -20,6 +20,7 @@ using System.Text;
 using System;
 using ChatApp.API.Interfaces;
 using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
 
 namespace ChatApp.API
 {
@@ -75,12 +76,28 @@ namespace ChatApp.API
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(option =>
             {
+                option.RequireHttpsMetadata = false;
+                option.SaveToken = true;
+
                 option.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidAudience = Configuration.GetSection("Jwt:audience").Value,
                     ValidIssuer = Configuration.GetSection("Jwt:issuer").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:securityKey").Value)),
                     ClockSkew = TimeSpan.Zero,
+                };
+                option.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/chathub")))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
             services.AddControllers();
