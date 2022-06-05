@@ -55,7 +55,6 @@ namespace ChatApp.API
             });
             services.AddIdentity<User, IdentityRole>(options =>
             {
-
                 options.Password.RequireLowercase = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;

@@ -11,20 +11,20 @@ namespace ChatApp.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(u=>u.UserName)
+            builder.Property(u => u.UserName)
                    .HasMaxLength(100)
                    .IsRequired();
-            builder.Property(u=>u.Name)
+            builder.Property(u => u.Name)
                    .HasMaxLength(100)
                    .IsRequired();
-            builder.Property(u=>u.Surname)
+            builder.Property(u => u.Surname)
                    .HasMaxLength(100)
                    .HasDefaultValue("XXX");
             builder
               .HasMany(u => u.Messages)
               .WithOne(m => m.SendUser)
-              .HasForeignKey(m => m.SendUserId);
-          
+              .HasForeignKey(m => m.SendUserId)
+              .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

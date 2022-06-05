@@ -23,11 +23,11 @@ namespace ChatApp.API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public async Task<ActionResult<List<GetUser>>> GetAll([FromQuery] PaginateQuery query)
+        public async Task<ActionResult<List<GetUser>>> GetAll([FromQuery] int page, [FromQuery] int size)
         {
             try
             {
-                return Ok(await _unitOfWork.UserService.GetUsers(query));
+                return Ok(await _unitOfWork.UserService.GetUsers(new PaginateQuery()));
             }
             catch (Exception ex)
             {

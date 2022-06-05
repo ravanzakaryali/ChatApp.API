@@ -36,7 +36,9 @@ namespace ChatApp.Business.Services.Implementations
         {
             User user = await _unitOfWork.UserRepository.GetAsync(u => u.UserName == username);
             if (user is null)
-                    throw new NotFoundException("User is not defined");
+            {
+                throw new NotFoundException("User is not defined");
+            }
             var loginUserId = _httpContext.HttpContext.User.GetUserId();
             var messagesDb = await _unitOfWork.MessageRepository.GetAllPaginateAsync(1,10,m=>m.SenderDate,m=>m.SendUserId == user.Id && m.UserId == loginUserId);
             return _mapper.Map<List<GetMessage>>(messagesDb);
