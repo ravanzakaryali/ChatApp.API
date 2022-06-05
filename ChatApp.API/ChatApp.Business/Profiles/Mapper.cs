@@ -15,6 +15,7 @@ namespace ChatApp.Business.Profiles
             CreateMap<User, GetUser>();
             CreateMap<Register, User>();
             CreateMap<MessageDto, Message>();
+            CreateMap<Message, GetMessage>();
         }
     }
 }
