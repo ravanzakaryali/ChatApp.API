@@ -40,7 +40,7 @@ namespace ChatApp.Business.Services.Implementations
                 throw new NotFoundException("User is not defined");
             }
             var loginUserId = _httpContext.HttpContext.User.GetUserId();
-            var messagesDb = await _unitOfWork.MessageRepository.GetAllPaginateAsync(1,10,m=>m.SenderDate,m=>(m.SendUserId == loginUserId && m.UserId == user.Id) || (m.SendUserId == user.Id && m.UserId == loginUserId));
+            List<Message> messagesDb = await _unitOfWork.MessageRepository.GetAllPaginateAsync(1,10,m=>m.SenderDate,m=>(m.SendUserId == loginUserId && m.UserId == user.Id) || (m.SendUserId == user.Id && m.UserId == loginUserId),"SendUser");
             return _mapper.Map<List<GetMessage>>(messagesDb);
         }
     }

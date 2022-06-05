@@ -31,8 +31,8 @@ namespace ChatApp.Data.Implementations
         {
             var query = GetQuery(includes);
             return exp is null
-                ? await query.OrderByDescending(orderBy).Skip((page - 1) * size).Take(size).ToListAsync()
-                : await query.Where(exp).OrderByDescending(orderBy).Skip((page - 1) * size).Take(size).ToListAsync();
+                ? await query.OrderBy(orderBy).Skip((page - 1) * size).Take(size).ToListAsync()
+                : await query.Where(exp).OrderBy(orderBy).Skip((page - 1) * size).Take(size).ToListAsync();
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> exp = null, params string[] includes)
