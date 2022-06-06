@@ -1,6 +1,4 @@
-﻿using ChatApp.API.Hubs;
-using ChatApp.API.Interfaces;
-using ChatApp.Business.DTO_s.Common;
+﻿using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.DTO_s.Message;
 using ChatApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -19,20 +17,16 @@ namespace ChatApp.API.Controllers
     public class ChatController : ControllerBase
     {
         private readonly IUnitOfWorkService _unitOfWork;
-        private readonly IHubContext<ChatHub, IChatClient> _hubContext;
-        public ChatController(IHubContext<ChatHub, IChatClient> hubContext, IUnitOfWorkService unitOfWork)
+        public ChatController(IUnitOfWorkService unitOfWork)
         {
-            _hubContext = hubContext;
             _unitOfWork = unitOfWork;   
         }
         [HttpPost]
-        public async Task<ActionResult> SendMessage(MessageDto message)
+        public async Task<ActionResult<GetMessage>> SendMessage(MessageDto message)
         {
             try
             {
-                await _hubContext.Clients.User(message.SendUserId).ReceiveMessage(message.Content);
-                await _unitOfWork.MessageService.SendMessage(message);
-                return NoContent();
+                return Ok(await _unitOfWork.MessageService.SendMessage(message));
             }
             catch (Exception ex)
             {

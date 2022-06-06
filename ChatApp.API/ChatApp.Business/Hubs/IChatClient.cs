@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ChatApp.Business.DTO_s.Message;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ChatApp.API.Interfaces
+namespace ChatApp.Business.Interfaces
 {
     public interface IChatClient 
     {
-        Task ReceiveMessage(string message);
+        Task ReceiveMessage(GetMessage message);
         Task GetClients(List<string> clients);
         Task GetConnectionId(string connectionId);
     }

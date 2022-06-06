@@ -21,5 +21,10 @@
     <ProjectReference Include="..\ChatApp.Business\ChatApp.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hubs\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 
 </Project>

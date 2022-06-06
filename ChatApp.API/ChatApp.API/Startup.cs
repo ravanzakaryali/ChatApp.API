@@ -1,4 +1,3 @@
-using ChatApp.API.Hubs;
 using ChatApp.Core.Entities;
 using ChatApp.Data.Subscription;
 using Microsoft.AspNetCore.Builder;
@@ -18,9 +17,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
-using ChatApp.API.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using ChatApp.Business.Interfaces;
+using ChatApp.Business.Hubs;
 
 namespace ChatApp.API
 {

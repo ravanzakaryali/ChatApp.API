@@ -1,7 +1,6 @@
-﻿using ChatApp.API.Interfaces;
-using ChatApp.Business.Extensions;
+﻿using ChatApp.Business.Extensions;
+using ChatApp.Business.Interfaces;
 using ChatApp.Data.DataAccess;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
@@ -11,9 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChatApp.API.Hubs
+namespace ChatApp.Business.Hubs
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class ChatHub : Hub<IChatClient>
     {
         private static readonly List<string> _clients = new List<string>();
@@ -50,17 +49,17 @@ namespace ChatApp.API.Hubs
             return base.OnDisconnectedAsync(exception);
 
         }
-        public async Task SendClientMessage(string message, string connectionId)
-        {
-            await Clients.Client(connectionId).ReceiveMessage(message);
-        }
-        public async Task AddGroup(string connectionId, string groupName)
-        {
-            await Groups.AddToGroupAsync(connectionId, groupName);
-        }
-        public async Task SendGroupMessage(string message, string groupName)
-        {
-            await Clients.Group(groupName).ReceiveMessage(message);
-        }
+        //public async Task SendClientMessage(string message, string connectionId)
+        //{
+        //    await Clients.Client(connectionId).ReceiveMessage(message);
+        //}
+        //public async Task AddGroup(string connectionId, string groupName)
+        //{
+        //    await Groups.AddToGroupAsync(connectionId, groupName);
+        //}
+        //public async Task SendGroupMessage(string message, string groupName)
+        //{
+        //    await Clients.Group(groupName).ReceiveMessage(message);
+        //}
     }
 }
