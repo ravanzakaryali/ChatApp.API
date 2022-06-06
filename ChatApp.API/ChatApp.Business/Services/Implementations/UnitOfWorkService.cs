@@ -44,6 +44,6 @@ namespace ChatApp.Business.Services.Implementations
         private IMessageService _messageService;
         private IUserService _userService;
         public IMessageService MessageService => _messageService ??= new MessageService(_unitOfWork, _mapper, _httpContext,_hubContext);
-        public IUserService UserService => _userService ??= new UserService(_unitOfWork, _userManager, _roleManager, _mapper, _jwtService, _configuration);
+        public IUserService UserService => _userService ??= new UserService(_unitOfWork, _userManager, _roleManager, _mapper, _jwtService, _configuration,_httpContext);
     }
 }

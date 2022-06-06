@@ -3,10 +3,12 @@ using ChatApp.Business.DTO_s.Autheticate;
 using ChatApp.Business.DTO_s.Common;
 using ChatApp.Business.DTO_s.User;
 using ChatApp.Business.Exceptions;
+using ChatApp.Business.Extensions;
 using ChatApp.Business.Helpers;
 using ChatApp.Business.Services.Interfaces;
 using ChatApp.Core;
 using ChatApp.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -27,13 +29,16 @@ namespace ChatApp.Business.Services.Implementations
         private readonly IMapper _mapper;
         private readonly IJwtService _jwtService;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContext;
+
 
         public UserService(IUnitOfWork unitOfWork,
                            UserManager<User> userManager,
                            RoleManager<IdentityRole> roleManager,
                            IMapper mapper,
                            IJwtService jwtService,
-                           IConfiguration configuration)
+                           IConfiguration configuration,
+                           IHttpContextAccessor httpContext)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
@@ -41,6 +46,7 @@ namespace ChatApp.Business.Services.Implementations
             _roleManager = roleManager;
             _jwtService = jwtService;
             _configuration = configuration;
+            _httpContext = httpContext;
         }
         public async Task<List<GetUser>> GetUsers(PaginateQuery query)
         {
@@ -49,6 +55,10 @@ namespace ChatApp.Business.Services.Implementations
         public async Task<GetUserInfo> GetUser(string username)
         {
             return _mapper.Map<GetUserInfo>(await _unitOfWork.UserRepository.GetAsync(u=>u.UserName == username));
+        }
+        public async Task<GetUserInfo> GetLoginUser()
+        {
+            return _mapper.Map<GetUserInfo>(await _unitOfWork.UserRepository.GetAsync(u => u.Id == _httpContext.HttpContext.User.GetUserId()));
         }
         public async Task<RegisterResult> Register(Register register)
         {

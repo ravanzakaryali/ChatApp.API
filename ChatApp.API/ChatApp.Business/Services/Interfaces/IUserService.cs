@@ -8,6 +8,7 @@ namespace ChatApp.Business.Services.Interfaces
 {
     public interface IUserService
     {
+        Task<GetUserInfo> GetLoginUser();
         Task<List<GetUser>> GetUsers(PaginateQuery query);
         Task<GetUserInfo> GetUser(string username);
         Task<RegisterResult> Register(Register register);
