@@ -13,5 +13,6 @@ namespace ChatApp.Business.DTO_s.User
         public bool IsActive { get; set; }
         public string Avatar { get; set; }
         public DateTime LastSeenDate { get; set; }
+        public string Address { get; set; }
     }
 }

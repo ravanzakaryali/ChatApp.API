@@ -1,5 +1,6 @@
 ﻿using ChatApp.Business.Extensions;
 using ChatApp.Business.Interfaces;
+using ChatApp.Core.Entities;
 using ChatApp.Data.DataAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace ChatApp.Business.Hubs
     [Authorize]
     public class ChatHub : Hub<IChatClient>
     {
-        private static readonly List<string> _clients = new List<string>();
+        private static readonly List<User> _clients = new List<User>();
         private readonly Data.DataAccess.DbContext _context;
         private readonly IHttpContextAccessor _httpContext;
         public ChatHub(
@@ -34,11 +35,10 @@ namespace ChatApp.Business.Hubs
             user.IsActive = true;
             _context.Update(user);
             _context.SaveChanges();
-            //_clients.Add(Context.ConnectionId);
-            //await Clients.All.GetClients(_clients);
-            //await Clients.Caller.GetConnectionId(Context.ConnectionId);
+            _clients.Add(user);
+            await Clients.All.GetClients(_clients);
         }
-        public override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
             var name = Context.User.Identity.Name;
             var user = _context.Users.Where(u => u.UserName == name).FirstOrDefault();
@@ -46,8 +46,8 @@ namespace ChatApp.Business.Hubs
             user.IsActive = false;
             _context.Update(user);
             _context.SaveChanges();
-            return base.OnDisconnectedAsync(exception);
-
+            _clients.RemoveAll(u=>u.UserName == name);
+            await Clients.All.GetClients(_clients);
         }
         //public async Task SendClientMessage(string message, string connectionId)
         //{

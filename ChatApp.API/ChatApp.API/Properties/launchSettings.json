@@ -19,8 +19,8 @@
     },
     "ChatApp.API": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api",
+      "launchBrowser": false,
+      "launchUrl": "api/user",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

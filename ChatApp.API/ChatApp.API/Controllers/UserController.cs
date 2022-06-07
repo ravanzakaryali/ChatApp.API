@@ -46,7 +46,7 @@ namespace ChatApp.API.Controllers
                 return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
             }
         } 
-        [HttpGet("login-user")]
+        [HttpGet("login")]
         public async Task<ActionResult<GetUserInfo>> GetLogin()
         {
             try
@@ -55,7 +55,7 @@ namespace ChatApp.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message });
+                return StatusCode(StatusCodes.Status502BadGateway, new Response { Status = "Error", Message = ex.Message});
             }
         }
     }
