@@ -42,7 +42,7 @@ namespace ChatApp.Business.Services.Implementations
                 SenderDate = System.DateTime.Now,
                 SendUser = _mapper.Map<GetUserInfo>(sendUser),
             };
-            await _hubContext.Clients.User(sendUser.Id).ReceiveMessage(getMessage);
+            await _hubContext.Clients.User(message.SendUserId).ReceiveMessage(getMessage);
             Message newMessage = _mapper.Map<Message>(message);
             newMessage.UserId = _httpContext.HttpContext.User.GetUserId();
             await _unitOfWork.MessageRepository.CreateAsync(newMessage);

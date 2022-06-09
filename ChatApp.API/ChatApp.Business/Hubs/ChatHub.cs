@@ -35,7 +35,10 @@ namespace ChatApp.Business.Hubs
             user.IsActive = true;
             _context.Update(user);
             _context.SaveChanges();
-            _clients.Add(user);
+            if (!_clients.Any(u => u.Name == name))
+            {
+                _clients.Add(user);
+            }
             await Clients.All.GetClients(_clients);
         }
         public override async Task OnDisconnectedAsync(Exception exception)
@@ -46,20 +49,8 @@ namespace ChatApp.Business.Hubs
             user.IsActive = false;
             _context.Update(user);
             _context.SaveChanges();
-            _clients.RemoveAll(u=>u.UserName == name);
+            _clients.RemoveAll(u => u.UserName == name);
             await Clients.All.GetClients(_clients);
         }
-        //public async Task SendClientMessage(string message, string connectionId)
-        //{
-        //    await Clients.Client(connectionId).ReceiveMessage(message);
-        //}
-        //public async Task AddGroup(string connectionId, string groupName)
-        //{
-        //    await Groups.AddToGroupAsync(connectionId, groupName);
-        //}
-        //public async Task SendGroupMessage(string message, string groupName)
-        //{
-        //    await Clients.Group(groupName).ReceiveMessage(message);
-        //}
     }
 }
