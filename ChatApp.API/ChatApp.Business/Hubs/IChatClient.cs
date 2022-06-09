@@ -10,5 +10,6 @@ namespace ChatApp.Business.Interfaces
         Task ReceiveMessage(GetMessage message);
         Task GetClients(List<User> clients);
         Task GetConnectionId(string connectionId);
+        Task GetClient(User user);
     }
 }

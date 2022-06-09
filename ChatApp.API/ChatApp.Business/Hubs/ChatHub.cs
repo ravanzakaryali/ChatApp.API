@@ -36,10 +36,11 @@ namespace ChatApp.Business.Hubs
             _context.Update(user);
             _context.SaveChanges();
             if (!_clients.Any(u => u.Name == name))
-            {
+            {   
                 _clients.Add(user);
             }
             await Clients.All.GetClients(_clients);
+            await Clients.All.GetClient(user);
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
@@ -51,6 +52,7 @@ namespace ChatApp.Business.Hubs
             _context.SaveChanges();
             _clients.RemoveAll(u => u.UserName == name);
             await Clients.All.GetClients(_clients);
+            await Clients.All.GetClient(user);
         }
     }
 }
