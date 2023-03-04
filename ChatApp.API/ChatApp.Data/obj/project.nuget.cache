@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d7jmVOglrjOR2YbKnDqBIT9aQxw3WMnd+sEnhllcrQ9bGRA0rjo4rN20eFrEupx1ukHF20erCH2RK+LPAzeA/Q==",
+  "dgSpecHash": "OwnESjSHZj20wFMHpPBboBQclQ1J7yYRE2uF52znHQinaFw7Cp69TA/n/FEvkUr5kMExEJvROjFw1XQnQM78Xg==",
   "success": true,
   "projectFilePath": "E:\\Programming\\SignalR\\SignalR.Server\\ChatApp.API\\ChatApp.Data\\ChatApp.Data.csproj",
   "expectedPackageFiles": [
